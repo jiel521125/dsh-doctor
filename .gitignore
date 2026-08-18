@@ -1,0 +1,17 @@
+# OS
+Thumbs.db
+Desktop.ini
+.DS_Store
+
+# Editor
+*.swp
+*.swo
+*~
+.vscode/
+
+# Backups (from patch-bin-dispatcher)
+*.bak
+
+# Temp / build artifacts
+*.tmp
+node_modules/

@@ -1,0 +1,56 @@
+================================================================================
+ args.ts.patch  —  apply with:
+   cd apps/cli/src
+   patch -l -p0 < args.ts.patch      (or use reference/args.ts to overwrite)
+ Lines marked '-' come OUT, lines marked '+' go IN. Context is shown as-is.
+================================================================================
+
+@@ PluginInvocation type block (after line ~45) ------------------------------
+- export type DshInvocation = ProfileInvocation | DumpConfigInvocation | PluginInvocation
++ /**
++  * Run the dsh-doctor environment diagnostician and exit by status.
++  * Exit codes: 0=all pass · 1=fail · 2=warn · 97-99 internal runner error
++  */
++ interface DoctorInvocation {
++   mode: 'doctor'
++   profile: string
++   patches: string[]
++   json: boolean
++   fix: boolean
++ }
++ 
++ /** The resolved `dsh` invocation. Help, version, and errors exit inside parseDshArgs. */
++ export type DshInvocation = ProfileInvocation | DumpConfigInvocation | PluginInvocation | DoctorInvocation
+
+@@ HELP_EXAMPLES block ---------------------------------------------------------
+ Examples:
+   dsh --profile web                          boot the web profile (same as: dsh web)
+   dsh --profile headless "run the tests"     answer one task, print the result, and exit
+   dsh --profile tui --patch ./extra.yml      boot a custom profile with one extra overlay
+   dsh --profile tui --resume <session>       arguments after the launcher flags reach the app
+   dsh --profile web --help                   the web app's own flags and help
+   dsh plugin --profile tui add <package>     install a plugin into the tui profile
++  dsh doctor --profile web                   run the 24-check environment diagnostician
++  dsh doctor --profile web --fix             diagnose + auto-repair simple issues
++  dsh doctor --profile headless --json       emit a JSON report for CI / tooling
+ `
+
+@@ After plugin.action(...) block, before try { program.parse(...) } ----------
++ const doctor = program.command('doctor')
++   .description('run the 24-check environment diagnostician (node/pnpm/git/profile/bundles/sandbox/session) and exit by status')
++ doctor
++   .requiredOption('--profile <name>', 'the profile under $DSH_HOME/profiles to inspect')
++   .option('--patch <path>', 'extra patch-list overlay for the patch-stack compose probe (repeatable)', collect)
++   .option('--json', 'emit JSON instead of coloured terminal output')
++   .option('--fix',  'attempt automatic repairs for simple issues and re-scan')
++   .action((_args: string[], options: { profile: string; patch?: string[]; json?: boolean; fix?: boolean }) => {
++     rejectParentOptions('doctor')
++     if (options.profile === '') program.error('error: --profile needs a name')
++     resolved = {
++       mode: 'doctor',
++       profile: options.profile,
++       patches: options.patch ?? [],
++       json:    options.json  === true,
++       fix:     options.fix   === true,
++     }
++   })

@@ -1,0 +1,25 @@
+================================================================================
+ bin.ts.patch  —  apply with:
+   cd apps/cli/src
+   patch -l -p0 < bin.ts.patch       (or use reference/bin.ts to overwrite)
+================================================================================
+
+@@ switch (invocation.mode) block — add the doctor arm before 'default' -------
+   case 'dump-config': {
+     const { runDumpConfig } = await import('./dump-config.ts')
+     runDumpConfig(invocation.profile, invocation.defaultOnly, invocation.patches)
+     break
+   }
++  case 'doctor': {
++    const { runDoctor } = await import('./doctor.ts')
++    process.exit(runDoctor({
++      profile: invocation.profile,
++      patches: invocation.patches,
++      json: invocation.json,
++      fix:  invocation.fix,
++    }))
++    break
++  }
+   default:
+     invocation satisfies never
+     throw new Error(`dsh: unhandled invocation mode ${JSON.stringify(invocation)}`)
