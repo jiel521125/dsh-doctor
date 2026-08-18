@@ -138,9 +138,32 @@ dsh-doctor/
         └── doctor-engine.js    ← engine copy (goes beside bin.ts after build at app/lib/)
 ```
 
+## Author
+
+- **作者**：周龙（天枢智能）
+- **微信**：longling1031
+- **邮箱**：1033085514@qq.com
+- **地址**：中国-浙江-嘉兴-平湖
+
 ## License / provenance
 
 Bundled alongside DeepSeek Harness; written to be a drop-in companion. The
 engine uses only Node builtins (`node:fs`, `node:path`, `node:os`,
 `node:child_process`, `node:crypto`, `node:module`) — no third-party packages,
 so it is safe to ship inside the installer without bloating the bundle.
+
+## Copyright
+
+Copyright © 2026 周龙（天枢智能）, 中国-浙江-嘉兴-平湖. All rights reserved.
+
+Permission is hereby granted to use, copy, modify, and distribute this software
+in source and binary forms, with or without modification, provided that the
+above copyright notice and this permission notice appear in all copies.
+
+THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR
+IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,
+FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE
+AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER
+LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
+OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
+SOFTWARE.
