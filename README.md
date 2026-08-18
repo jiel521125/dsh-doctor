@@ -140,10 +140,10 @@ dsh-doctor/
 
 ## Author
 
-- **作者**：周龙（天枢智能）
-- **微信**：longling1031
-- **邮箱**：1033085514@qq.com
-- **地址**：中国-浙江-嘉兴-平湖
+- **Name**: Zhou Long (Tianshu Intelligent / 天枢智能)
+- **WeChat**: longling1031
+- **Email**: 1033085514@qq.com
+- **Location**: Pinghu, Jiaxing, Zhejiang, China
 
 ## License / provenance
 
@@ -154,7 +154,7 @@ so it is safe to ship inside the installer without bloating the bundle.
 
 ## Copyright
 
-Copyright © 2026 周龙（天枢智能）, 中国-浙江-嘉兴-平湖. All rights reserved.
+Copyright © 2026 Zhou Long (Tianshu Intelligent), Pinghu, Jiaxing, Zhejiang, China. All rights reserved.
 
 Permission is hereby granted to use, copy, modify, and distribute this software
 in source and binary forms, with or without modification, provided that the
